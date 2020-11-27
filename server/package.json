@@ -1,0 +1,35 @@
+{
+  "name": "smartcity",
+  "version": "1.0.0",
+  "description": "powered by mhdi",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+   
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dequanmeng/unip.git"
+  },
+  "author": "MHDI",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "*",
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "cors": "*",
+    "dotenv": "*",
+    "express": "*",
+    "express-fileupload": "*",
+    "jsonwebtoken": "*",
+    "mkdirp": "*",
+    "mongoose": "*",
+    "socket.io": "*",
+    "validator": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/dequanmeng/unip/issues"
+  },
+  "homepage": "https://github.com/dequanmeng/unip#readme"
+}
