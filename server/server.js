@@ -7,7 +7,7 @@ var port = process.env.PORT || 4000;
 const mongoose =require('mongoose');
 const bodyParser=require("body-parser");
 const cors=require("cors");
-// const {auth} =require('./middleware/auth.js') ;
+const {auth} =require('./middleware/auth.js') ;
 require('dotenv/config');
 const io = require('socket.io')(server);
 const mkdirp = require('mkdirp')
@@ -29,7 +29,7 @@ server.listen(port, () => {
 // import route
 const usersRoute=require("./routes/user")
 const gatesRoute=require("./routes/gate")
-
+const loginRoute=require("./routes/login")
 
 
 // db connection
@@ -54,8 +54,16 @@ app.use(cors())
 //app.use(express.json())
 app.use(bodyParser.json());
 app.use(fileUpload());
-// app.use("/login",loginRoute);
-// app.use(auth);
+app.use("/login",loginRoute);
+app.post("/",(req,res)=>{
+  res.send("welcome to smartcity")
+  
+  
+  })
+app.get("/",(req,res)=>{
+res.json({"message":"welcome to smartcity"})
+})
+app.use(auth);
 // app.use("/signup",signupRoute);
 app.use("/users",usersRoute);
 app.use("/gates",gatesRoute);
@@ -95,14 +103,7 @@ app.get("/upload/:name",(req,res)=>{
  // res.json(req.params.name)
   
   })
-app.post("/",(req,res)=>{
-    res.send("welcome to smartcity")
-    
-    
-    })
-app.get("/",(req,res)=>{
-  res.json({"message":"welcome to smartcity"})
-})
+
 
       
 

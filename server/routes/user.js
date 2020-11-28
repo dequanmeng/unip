@@ -1,8 +1,9 @@
 const express= require("express");
 const router=express.Router();
-const User =require("../models/user")
-// const jwt=require('jsonwebtoken')
-// require('dotenv/config');
+const User =require("../models/user");
+require('dotenv/config');
+const jwt=require('jsonwebtoken')
+const bcrypt=require("bcrypt");
 //--------------------------------------------------------------------
 const handleErrors=(err)=>{
 // console.log(err.message,err.code);
@@ -36,9 +37,13 @@ return errors;
 // const maxAge= 3*24*60*60;
 // const createToken=(id)=>{
 //   return jwt.sign({id},process.env.JWT_SECRET,{
-//     expiresIn:maxAge
+//     expiresIn:'3d'
 //   })
 // }
+//-------------------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------------------
+
 
 //-------------------------------------------------------------------------------------------
 router.get("/",  (req,res) => {
