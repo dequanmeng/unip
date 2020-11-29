@@ -27,13 +27,17 @@ router.post("/",async (req,res)=>{
     try {
       // Check for existing user
       const user = await User.findOne({ email });
-      if (!user) throw Error('[Error]:route.login.post:User Does not exist');
+      //this message is shown to user
+      if (!user) throw Error('Invalid credentials');
+      console.log('[Error]:route.login.post:User Does not exist')
   
       const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) throw Error('[Error]:route.login.post:Invalid credentials');
+      if (!isMatch) throw Error('Invalid credentials');
+      console.log('[Error]:route.login.post:Invalid credentials');
   
-      const token = jwt.sign({ id: user._id ,ip}, process.env.JWT_SECRET, { expiresIn: '2d' });
-      if (!token) throw Error('[Error]:route.login.post:Couldnt sign the token');
+      const token = jwt.sign({ id: user._id ,ip}, process.env.JWT_SECRET, { expiresIn: 3*24*1000*3600 });
+      if (!token) throw Error('Couldnt sign the token');
+      console.log('[Error]:route.login.post:Couldnt sign the token')
   
       res.status(200).json({
         token,

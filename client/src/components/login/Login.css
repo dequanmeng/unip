@@ -1,0 +1,99 @@
+
+/* rgb(64, 131, 139); */
+.Login{
+    display: grid;
+    /* padding: 10px ; */
+    /* justify-content: center;
+    align-items: center; */
+    place-items: center;
+     /* background-color:#282c34; */
+     background-color: #2f3136;
+    height: 100vh;
+   
+}
+.Login-form{
+    min-width: 149px;
+    /* max-width: 608px; */
+    /* height: 500px; */
+    color: aliceblue; 
+    width: 300px;
+    border-radius: .25rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+    padding: 20px;
+    padding-top: 0;
+    
+    z-index: 99;
+    background-color: #36393f;
+}
+.Login-form>p{
+   margin-bottom: 30px;
+   margin-top: 30px;
+
+}
+/* Style the input container */
+.input-container {
+  display: flex;
+  width: 100%;
+  margin-bottom: 25px;
+  height: 50px;
+  
+}
+
+/* Style the form icons */
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: var(--color-green);
+  color: white;
+  border-top-left-radius: .25rem;
+  border-bottom-left-radius: .25rem;
+  min-width: 30px;
+  text-align: center;
+  
+}
+.icon>img{
+  filter: invert(100%);
+  width: 24px;
+}
+
+/* Style the input fields */
+.input-field {
+  width: 100%;
+  padding: 10px;
+  outline: none;
+  border: none;
+  font-size: 15px;
+  outline-width:0 ;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+  border-top-right-radius: .25rem;
+  border-bottom-right-radius: .25rem;
+  background-color: #282c34;
+  color:white;
+  caret-color: var(--color-green);
+
+}
+
+.input-field:focus {
+  border: 2px solid var(--color-green);
+}
+
+/* Set a style for the submit button */
+.btn {
+  background-color: var(--color-green);
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+.login-error{
+
+  color: red;
+}
