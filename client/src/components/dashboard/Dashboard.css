@@ -1,0 +1,13 @@
+
+.dashboard{
+    width: calc(100% - 60px);
+    height: 100vh;
+    background-color: var(--color-gray);
+}
+.searchbar-container{
+    display:grid;
+    place-items: center;
+    
+    padding-top:  20px ;
+    padding-bottom: 20px;
+}

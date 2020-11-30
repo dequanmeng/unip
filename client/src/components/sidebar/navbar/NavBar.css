@@ -1,0 +1,18 @@
+.navbar{
+    width: 48px;
+    height: 25vh;
+    background-color: var(--color-dark);
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+}
+.navitem-img{
+    width: 55%; 
+    
+  
+    
+}
+.navbaritem-container{
+   
+   
+}

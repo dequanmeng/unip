@@ -1,0 +1,8 @@
+.sidebar{
+    display: grid;
+    place-items: center;
+    width: 60px;
+    height: 100vh;
+    background-color: var(--color-gray);
+
+}
