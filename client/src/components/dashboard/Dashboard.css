@@ -3,11 +3,20 @@
     width: calc(100% - 60px);
     height: 100vh;
     background-color: var(--color-gray);
+    overflow-y: auto;
+ 
 }
 .searchbar-container{
     display:grid;
     place-items: center;
-    
+   
     padding-top:  20px ;
     padding-bottom: 20px;
+}
+.gate_container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    padding-top:20px; 
 }

@@ -1,0 +1,31 @@
+.gate{
+    width: 300px;
+    height: 350px;
+    background-color: var(--color-gray-dark);
+    margin-right: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color:white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+    margin-top: 2rem;
+}
+.gate>p{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.gate-btn{
+    width: 200px;
+    height: 60px;
+    color: white;
+    font-size: 20px;
+    background-color: var(--color-green);
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+.gateImg-container>img{
+    width: 33%;
+    
+}

@@ -1,9 +1,11 @@
 .searchbar{
-    width: 35%;
+    min-width: 35%;
     height: 40px;
     background-color:var(--color-dark);
     border-radius: 5px;
     display: flex;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+
 }
 .search-icon-container{
    width: 10%;
