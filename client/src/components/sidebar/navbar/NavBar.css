@@ -1,6 +1,6 @@
 .navbar{
     width: 48px;
-    height: 25vh;
+    height: 30vh;
     background-color: var(--color-dark);
     border-radius: 8px;
     display: grid;

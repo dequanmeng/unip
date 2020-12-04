@@ -1,0 +1,44 @@
+.logout{
+  color:gainsboro;
+  border-radius:10px ;
+  -webkit-border-radius:10px ;
+  -moz-border-radius:10px ;
+  -ms-border-radius:10px ;
+  -o-border-radius:10px ;
+}
+.logout-icon{
+    width: 15%;
+}
+.logout>p{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.logout-btn-container{
+    display:flex;
+    justify-content: center;
+
+}
+.logout-btn{
+    border-radius: 3px;
+    -webkit-border-radius: 3px; 
+    -moz-border-radius: 3px; 
+    -ms-border-radius: 3px; 
+    -o-border-radius: 3px;
+    width: 90px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    height: 50px;
+    border:none;
+    cursor: pointer;
+}
+.logout-btn-red{ 
+ 
+     background-color: crimson;
+   
+     margin-right: 20px;
+
+}
+.logout-btn-green{
+
+    background-color: var(--color-green);
+
+}

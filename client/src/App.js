@@ -50,12 +50,15 @@ function App() {
 
        <PublicRoute auth={auth}>
        <Switch>
-            {/* <Route path="*">
+            <Route path="/logout">
                 <Redirect to="/login" />
-            </Route> */}
+            </Route>
 
             <Route path="/login"> 
                   <Login/>
+            </Route>
+            <Route path="*">
+                <Redirect to="/login" />
             </Route>
             </Switch>
       </PublicRoute> 

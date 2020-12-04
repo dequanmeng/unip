@@ -18,7 +18,7 @@ const userSchema =  new mongoose.Schema({
     password:{type:String,required:[ true , "please enter an Password"],minlength:[ 8 , "minimum password length is 8 charecter"]}
 
    
-
+    //isInside
     // isActive:{}
     
     // phoneNumber:{ type : String  ,required : true},

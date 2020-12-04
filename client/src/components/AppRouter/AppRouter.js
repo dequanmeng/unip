@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react';
 import { Redirect, Route, Switch, useLocation } from "react-router";
 import { Dashboard } from '../dashboard/Dashboard';
+import Logout from '../logout/Logout';
 import { SideBar } from '../sidebar/SideBar';
 
 // import { NoMatch } from '../NoMatch/NoMatch';
@@ -9,12 +10,12 @@ import { SideBar } from '../sidebar/SideBar';
 
 export const  AppRouter=() =>{
   const location = useLocation();
-  // const location=useLocation()
-
+ 
+  let background = location.state && location.state.background;
     return (
         <>
         <SideBar />
-    <Switch>
+    <Switch location={background || location}>
     <Redirect from="/:url*(/+)" to={location.pathname.slice(0, -1)} />
     <Route exact path="/">
       <Redirect to="dashboard"/>
@@ -28,12 +29,13 @@ export const  AppRouter=() =>{
     <Route path="/profile">
      
     </Route>
+ 
 
     <Route path="*">
                 <Redirect to="/dashboard" />
     </Route>
   </Switch>
-          
+  {background && <Route path="/logout" children={<Logout/>} />} 
         </>
     )
 }

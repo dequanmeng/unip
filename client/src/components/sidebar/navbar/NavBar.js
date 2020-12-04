@@ -5,7 +5,8 @@ import dashboardiconb from './dashboardb.svg'
 import usericonb from './userb.svg'
 import adminiconb from './managementb.svg'
 import dashboardicon from './dashboard.svg'
-
+import logouticon from './logout.svg'
+import logouticonb from './logoutb.svg'
 import usericon from './user.svg'
 import adminicon from './management.svg'
 import { useLocation } from "react-router";
@@ -21,7 +22,9 @@ export const NavBar = () => {
            temp=2;
        }else if(location.pathname=='/admin'){
            temp=3;
-       }
+       }else if(location.pathname=='/logout'){
+        temp=10;
+    }
        setActive(temp)
 
     }, [location])
@@ -43,6 +46,16 @@ export const NavBar = () => {
             <div className="navbaritem-container">
              <Link to="/admin">
                 <img className="navitem-img" src={Active==3?adminiconb:adminicon}  />
+             </Link> 
+
+            </div>
+            <div className="navbaritem-container">
+             <Link to={{
+                    pathname: '/logout',
+           
+                       state: { background: location }
+                    }}>
+                <img className="navitem-img" src={Active==10?logouticonb:logouticon}  />
              </Link> 
 
             </div>
