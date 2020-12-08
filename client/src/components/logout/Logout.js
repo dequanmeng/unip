@@ -48,7 +48,7 @@ const Logout = (props) => {
                    position:'absolute',
                     width:'30%',
                     height:'34%',
-                    background: "var(--color-gray-dark)",
+                    background: "#16191d",
                     left:'35%',
                     top:'33%',
                     padding: 15,

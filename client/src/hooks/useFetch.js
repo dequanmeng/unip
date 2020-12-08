@@ -2,7 +2,7 @@ import React from 'react'
 
 
 // import axios from 'axios';
-import config from './../config/config';
+import config from '../config/config';
 
 export const useFetch = (url, options={}) => {
     // url, options
@@ -17,7 +17,7 @@ export const useFetch = (url, options={}) => {
             setIsLoading(true);
             try {
               const res = await fetch(
-                config.baseUrl+'/gates',{
+                config.baseUrl+url,{
                     method:'GET',
                         headers:{
                             'Content-Type': 'application/json',
@@ -26,7 +26,9 @@ export const useFetch = (url, options={}) => {
                        }
               )    
               const data=await res.json()  
+              console.log('----useFetch----')
               console.log(data)
+              console.log('----------------')
            
               if (data.length){
                 setResponse(data);

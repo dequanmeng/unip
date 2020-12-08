@@ -1,0 +1,32 @@
+.deleteuser-container{
+    width: 26%;
+    height: 50vh;
+    position: absolute;
+    left: calc(50% - 13%);
+    top:calc(50% - 25vh);
+    background-color: var(--color-gray-dark);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    
+}
+.deleteIcon{
+    width: 15%;
+}
+.deleteIcon-container{
+    text-align: center;
+}
+
+
+.deleteuser-container>p{
+     margin-top: 1rem;
+     margin-bottom: 1rem;
+}
+.ml{
+     margin-left:2rem;
+}
+.deleteuser-button-container{
+padding: 1rem;
+}

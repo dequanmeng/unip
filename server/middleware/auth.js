@@ -26,6 +26,9 @@ const auth=(req, res, next) => {
      
       res.status(400).json({ msg: 'XSS detected :(' });
     }
+
+
+
   } catch (e) {
     console.log(JWT_SECRET );
     res.status(400).json({ msg: 'Token is not valid',err:e });

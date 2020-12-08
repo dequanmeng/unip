@@ -1,0 +1,60 @@
+.adduser-container{
+    position: absolute;
+    left: 25%;
+    top:calc(50% - 35vh);
+    display:flex;
+     justify-content: center;
+    background-color: var(--color-gray-dark);
+    width: 50%;
+    height: 70vh;
+    color: white;
+    border: none;
+    outline-width: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.input-checkbox{
+   color:var(--color-green);
+   margin-left: 2rem;
+}
+.input-field-checkbox{
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.checkbox-container{
+   width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.55);
+    padding: 0 1.5rem;
+}
+.security-container ,.contact-container,.id-container{
+  display: flex;
+  
+ width: 100%;
+  
+}
+.ml{
+    margin-left: 2rem;
+}
+.adduser-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.adduser-form>p{
+    margin-bottom: 2rem;
+}
+.adduser-button-container{
+    width: 40%;
+   margin-top:1rem ;
+    display: flex;
+    justify-content: space-between;
+}
+.adduser-error{
+    color: red;
+}

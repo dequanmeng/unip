@@ -30,9 +30,9 @@ router.post("/",async (req,res)=>{
       //this message is shown to user
       if (!user) throw Error('Invalid credentials');
       console.log('[Error]:route.login.post:User Does not exist')
-  
+      const isAdmin=user.isAdmin
       const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) throw Error('Invalid credentials');
+      if (!isMatch || !isAdmin) throw Error('Invalid credentials');
       console.log('[Error]:route.login.post:Invalid credentials');
   
       const token = jwt.sign({ id: user._id ,ip}, process.env.JWT_SECRET, { expiresIn: 3*24*1000*3600 });

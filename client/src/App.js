@@ -57,9 +57,9 @@ function App() {
             <Route path="/login"> 
                   <Login/>
             </Route>
-            <Route path="*">
+            {/* <Route path="*">
                 <Redirect to="/login" />
-            </Route>
+            </Route> */}
             </Switch>
       </PublicRoute> 
       

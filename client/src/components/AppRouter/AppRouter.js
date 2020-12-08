@@ -1,5 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch, useLocation } from "react-router";
+import { AdminPanel } from '../admin/AdminPanel';
+import { UsersPanel } from '../admin/users/UsersPanel';
 import { Dashboard } from '../dashboard/Dashboard';
 import Logout from '../logout/Logout';
 import { SideBar } from '../sidebar/SideBar';
@@ -23,12 +25,25 @@ export const  AppRouter=() =>{
     <Route path="/dashboard">
      <Dashboard/>
      </Route>
-    <Route path="/admin">
-   
+    <Route path="/admin" exact={true}>
+        <AdminPanel/>
+
+  
+
+    </Route>
+    <Route path="/admin/users" >
+            <UsersPanel/>
+    </Route>
+
+    <Route path="/admin/gates">
+        
     </Route>
     <Route path="/profile">
      
     </Route>
+    {/* <Route path="/users/edit">
+    <div>{location?.state?.data?.firstName||'ops no data'}</div>
+     </Route> */}
  
 
     <Route path="*">
