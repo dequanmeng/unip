@@ -90,10 +90,10 @@ let topic;
      });
 
 gate.save()
-.then(data=>res.json(data))
+.then(data=>res.json({gate:data}))
 .catch(err=>{
     console.log("[gate_error] : "+handleErrors(err));
-    res.json({message:handleErrors(err)})
+    res.json({errors:handleErrors(err)})
 })
 
 
@@ -103,11 +103,15 @@ gate.save()
   
     });
 
-    router.delete("/:name",(req,res)=>{
-        Gate.remove({name:req.params.name},(result)=>{
-            res.send(result)
-        })
-     });
+    router.delete("/",(req,res)=>{
+      console.log(req.body.id);
+      Gate.deleteOne({_id:req.body.id},(result)=>{
+        console.log(result);
+        res.json({msg:'gate successfully deleted'})
+    })
+    })
+
+
 
 
 
@@ -133,6 +137,55 @@ router.get("/:name",(req,res)=>{
   });
       
 })
+
+
+router.patch("/",async(req,res)=>{
+  const cdata='name'
+
+  const cid=req.body.id
+
+  if(req.body.name){
+  Gate.updateOne({_id:cid}, {name:req.body.name},(err,result)=>{
+    if(!err){
+
+     res.json({cdata,result})
+    }else{
+      console.log(err);
+      const errors=handleErrors(err) 
+      res.json({ errors})
+    }
+  })
+}else{
+  
+  res.json({ errors:{name:'please enter an Name'}})
+
+}
+   })
+
+
+
+   router.patch("/resetapi",async(req,res)=>{
+ 
+  
+    const cid=req.body.id
+    const newApi=Gate.newApiKey(cid)
+    res.json({newApi})
+      
+     })
+
+    
+
+   
+
+
+
+
+
+
+
+
+
+
 
 
 

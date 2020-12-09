@@ -1,0 +1,17 @@
+.addgate-container{
+    position: absolute;
+    left: 32%;
+    top:calc(50% - 25vh);
+    display:flex;
+     justify-content: center;
+    background-color: var(--color-gray-dark);
+    width: 36%;
+    height: 50vh;
+    color: white;
+    border: none;
+    outline-width: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.addgate-button-container{
+    
+}

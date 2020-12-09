@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch, useLocation } from "react-router";
 import { AdminPanel } from '../admin/AdminPanel';
+import { GatesPanel } from '../admin/gates/GatesPanel';
 import { UsersPanel } from '../admin/users/UsersPanel';
 import { Dashboard } from '../dashboard/Dashboard';
 import Logout from '../logout/Logout';
@@ -36,14 +37,12 @@ export const  AppRouter=() =>{
     </Route>
 
     <Route path="/admin/gates">
-        
+           <GatesPanel/>
     </Route>
     <Route path="/profile">
      
     </Route>
-    {/* <Route path="/users/edit">
-    <div>{location?.state?.data?.firstName||'ops no data'}</div>
-     </Route> */}
+
  
 
     <Route path="*">

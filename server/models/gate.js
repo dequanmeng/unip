@@ -29,9 +29,12 @@ const gateSchema =  new mongoose.Schema({
 
 
 
-gateSchema.methods.newApiKey = function(name) {
+gateSchema.statics.newApiKey = function(id) {
    const newkey=genKey();
-   this.updateOne({name:name},{apiKey:newkey})
+   this.updateOne({_id:id},{apiKey:newkey},(err,res)=>{
+     console.log(err);
+     console.log(res);
+   })
    return newkey;
  };
 
