@@ -1,20 +1,24 @@
 const express= require("express");
 const router=express.Router();
 const Gate =require("../models/gate")
-
+const GAPI = require('../middleware/gateauth');
 const API = require('../middleware/apikey');
 
 const handleErrors=(err)=>{
     // console.log(err.message,err.code);
     
-    let errors={name:""}
+    let errors={name:"",topic:""}
      // incorrect email
 
     
     // incorrect password
 
     if(err.code===11000){
+      if(err.keyValue["name"])
       errors.name="that name is already registered";
+      if(err.keyValue["topic"])
+      errors.topic="that name (topic) is already registered";
+     
       return errors
     }
     
@@ -81,7 +85,7 @@ let topic;
   
   const gate =  new Gate({
   
-
+    creator:req.user.id,
     name:req.body.name,
     
   
@@ -103,7 +107,7 @@ gate.save()
   
     });
 
-    router.delete("/",(req,res)=>{
+    router.delete("/",GAPI.gateauth,(req,res)=>{
       console.log(req.body.id);
       Gate.deleteOne({_id:req.body.id},(result)=>{
         console.log(result);
@@ -139,7 +143,7 @@ router.get("/:name",(req,res)=>{
 })
 
 
-router.patch("/",async(req,res)=>{
+router.patch("/",GAPI.gateauth,async(req,res)=>{
   const cdata='name'
 
   const cid=req.body.id
@@ -164,7 +168,7 @@ router.patch("/",async(req,res)=>{
 
 
 
-   router.patch("/resetapi",async(req,res)=>{
+   router.patch("/resetapi",GAPI.gateauth,async(req,res)=>{
  
   
     const cid=req.body.id

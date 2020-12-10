@@ -12,7 +12,7 @@ const mongoose = require('mongoose');
 
 
 const gateSchema =  new mongoose.Schema({
-      
+       creator:{ type : mongoose.Schema.Types.ObjectId , ref : 'User'},
        name:{type : String ,  trim: true,unique : true  ,required : [ true , "please enter an Name"]},
        lable: [String],
        apiKey:{type : String , unique : true  ,required : true,default:function() { return genKey()} },

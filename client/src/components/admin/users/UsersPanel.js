@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './UsersPanel.css'
 import {useFetch }from './../../../hooks/useFetch'
 import MaterialTable , { MTableToolbar }from 'material-table';
@@ -16,10 +16,14 @@ import {icons }from './../../util/icon/icons'
 import { AddUser } from './adduser/AddUser';
 import { DeleteUser } from './deleteuser/DeleteUser';
 import { ResetPassword } from './resetpassword/ResetPassword';
+import config from './../../../config/config';
+import { useCurrentUser } from '../../../hooks/useCurrentUser';
 export const UsersPanel = () => {
   const tableRef = React.createRef();
    const res= useFetch('/users')
+  
    const history=useHistory()
+  //  const [status, setstatus] = useState()
    const [dopen, setdopen] = useState(false)
    const [ddata, setddata] = useState('')
    const [ropen, setropen] = useState(false)
@@ -28,8 +32,32 @@ export const UsersPanel = () => {
    const [modalbody, setmodalbody] = useState('')
    const [editdata, seteditdata] = useState({_id:"",email:"",firstName:"",lastName:"",phoneNumber:"",isAdmin:false})
    const [editmode, seteditmode] = useState(false)
-  //  const [apipath, setapipath] = useState()
-  
+   const user = useCurrentUser()
+ 
+// useEffect(() => {
+//   const cc =async()=>{
+//     const res = await fetch(
+//       config.baseUrl+'/users/currentuser',{
+//           method: 'GET',
+   
+//               headers:{
+//                 // 'Access-Control-Allow-Origin': 'http://localhost:3000',
+//                 'Access-Control-Allow-Origin': "*",
+//                 'Access-Control-Allow-Headers': "*",
+//                 'Content-Type': 'application/json',
+//                 'x-auth-token': localStorage.getItem('token')
+//               }   
+//              }
+//     )    
+//  var user=await res.json()
+
+
+//   setuser(user.user)   
+//   }
+//     cc()
+// }, [])
+
+
    const handleOpen = () => {
      seteditmode(false)
      setOpen(true);
@@ -45,6 +73,32 @@ export const UsersPanel = () => {
      window.location.reload()
     };
 
+    const checkAccess=(id)=>{
+    
+        
+
+     var child=[]
+
+   
+   
+       user?.creatures?.map(c=>{
+        child.push(String(c._id))
+      })
+     
+      
+      // console.log(user._id==id );
+      // console.log(be.search('isSuperAdmin')!=-1 );
+      // console.log(child.includes(id));
+     
+      if (user?._id==id || user?.isSuperAdmin|| child.includes(id) ){
+          
+            return false
+      }else{
+          
+            return true
+      }  
+
+    }
 
 
     return (
@@ -72,6 +126,10 @@ export const UsersPanel = () => {
        
                 { title: 'Phone', field: 'phoneNumber' },
                 { title: 'isAdmin', field: 'isAdmin' ,lookup:{ true: <span style={{color:'green'}}>&#10003;</span>, false: "_" }},
+                { title: 'creator', field: 'creator' ,cellStyle: {
+                  
+                  color: 'orange'
+                }},
                 { title: 'createdAt', field: 'createdAt' ,
             
                 render: row => <span>{ moment(row["createdAt"]).format('lll')   }</span>
@@ -98,7 +156,8 @@ export const UsersPanel = () => {
               setOpen(true)
               // seteditdata({editdata,hidepassword:true})
 
-              }
+              },
+              disabled: checkAccess(rowData['_id'])
               // disabled: rowData.isAdmin==true
         
             }),
@@ -109,9 +168,11 @@ export const UsersPanel = () => {
                 setdopen(true)
                 setddata(rowData)
               
-              
-              },
-              disabled: rowData.isAdmin==true
+              }
+              ,
+              disabled: checkAccess(rowData['_id'])
+              // },
+              // disabled: rowData.isAdmin==true
             }),
             rowData => ( {
               icon: () => < VpnKeyIcon/>,
@@ -119,13 +180,16 @@ export const UsersPanel = () => {
               onClick: (event, rowData) => {
               //  history.push({
               //   pathname: '/users/changepassword',
-                
+              // var re=checkAccess(rowData['_id']).then((res)=>{return res})
+              // console.log(re);
+           
               //   state: {data:rowData}
               // })
+              // console.log(cc(rowData['_id']));
               setrdata(rowData)
               setropen(true)
               },
-              disabled: rowData.isAdmin==true
+              disabled: checkAccess(rowData['_id'])
         
             }),
 

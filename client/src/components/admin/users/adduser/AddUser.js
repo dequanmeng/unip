@@ -23,7 +23,7 @@ export const AddUser = ({edata,handleClose,editmode}) => {
    const [active, setactive] = useState(false)
    const [errorMsg, seterrorMsg] = useState({email:"",password:"",firstName:"",lastName:"",phoneNumber:""})
    const [response, setresponse] = useState('')
-   
+   console.log(edata);
    const handleSubmit=async (e)=>{
     e.preventDefault();
 

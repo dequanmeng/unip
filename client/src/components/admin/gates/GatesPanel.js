@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 import './GatesPanel.css'
 import {useFetch }from './../../../hooks/useFetch'
 import MaterialTable , { MTableToolbar }from 'material-table';
@@ -20,6 +20,7 @@ import Delete from './../users/delete.svg'
 import {icons }from './../../util/icon/icons'
 import { AddGate } from './addgate/AddGate';
 import { DeleteGate} from './deletegate/DeleteGate';
+import { useCurrentUser } from '../../../hooks/useCurrentUser';
 // import { ResetPassword } from './resetpassword/ResetPassword';
 
 function Alert(props) {
@@ -34,13 +35,66 @@ export const GatesPanel = () => {
    const [dopen, setdopen] = useState(false)
    const [ddata, setddata] = useState('')
    const [sopen, setsopen] = useState(false)
-  //  const [ropen, setropen] = useState(false)
+   const user = useCurrentUser()
    const [cdata, setcdata] = useState('')
    const [open, setOpen] = useState(false);
    const [modalbody, setmodalbody] = useState('')
    const [editdata, seteditdata] = useState({_id:"",name:"",apiKey:""})
    const [editmode, seteditmode] = useState(false)
   //  const [apipath, setapipath] = useState()
+  // useEffect(() => {
+  //   const cc =async()=>{
+  //     const res = await fetch(
+  //       config.baseUrl+'/users/currentuser',{
+  //           method: 'GET',
+     
+  //               headers:{
+  //                 // 'Access-Control-Allow-Origin': 'http://localhost:3000',
+  //                 'Access-Control-Allow-Origin': "*",
+  //                 'Access-Control-Allow-Headers': "*",
+  //                 'Content-Type': 'application/json',
+  //                 'x-auth-token': localStorage.getItem('token')
+  //               }   
+  //              }
+  //     )    
+  //  var user=await res.json()
+  
+  
+  //   setuser(user.user)   
+  //   }
+  //     cc()
+  // }, [])
+  const checkAccess=(id)=>{
+    
+        
+
+    var child=[]
+
+   
+  
+      user?.creatures?.map(c=>{
+       child.push(String(c._id))
+     })
+    
+  
+     // console.log(be.search('isSuperAdmin')!=-1 );
+     // console.log(child.includes(id));
+    
+     if (user?._id==id || user?.isSuperAdmin|| child.includes(id) ){
+         
+           return false
+     }else{
+         
+           return true
+     }  
+
+   }
+
+
+
+
+
+
   const handleSnackClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -76,6 +130,10 @@ export const GatesPanel = () => {
                 { title: 'name', field: 'name' ,cellStyle: {color: 'green'}},
                 { title: 'apiKey', field: 'apiKey'  , cellStyle: {color: 'blue'}, },
                 { title: 'topic', field: 'topic' ,cellStyle: {color: 'red'}},
+                { title: 'creator', field: 'creator' ,cellStyle: {
+                  
+                  color: 'orange'
+                }},
                 { title: 'createdAt', field: 'createdAt' ,
             
                 render: row => <span>{ moment(row["createdAt"]).format('lll')   }</span>
@@ -96,7 +154,8 @@ export const GatesPanel = () => {
               setOpen(true)
 
 
-              }
+              },
+              disabled: checkAccess(rowData['creator'])
             
         
             }),
@@ -108,7 +167,8 @@ export const GatesPanel = () => {
                 setddata(rowData)
               
               
-              }
+              },
+              disabled: checkAccess(rowData['creator'])
             }),
             rowData => ( {
               icon: () => <AutorenewIcon/>,
@@ -146,7 +206,8 @@ export const GatesPanel = () => {
               //--------------------------------
               
       
-              }
+              },
+              disabled: checkAccess(rowData['creator'])
         
             }),
             rowData => ( {

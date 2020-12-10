@@ -3,6 +3,7 @@ const {isEmail} =require ("validator")
 const bcrypt=require("bcrypt");
 
 const userSchema =  new mongoose.Schema({
+    creator:{ type : mongoose.Schema.Types.ObjectId , ref : 'User'},
     email: { 
         type : String , 
         
@@ -31,9 +32,9 @@ const userSchema =  new mongoose.Schema({
     // isManager:{type: Boolean, default: false}
     // roles : [{ type : Schema.Types.ObjectId , ref : 'Role'}],
     // isActivated: {type: Boolean, default: false},
+    //current token :for xss double check or refresh in logout should be null
 
-
-} , { timestamps : true  });
+} , { timestamps : true, toJSON : { virtuals : true }  });
 
 
 function blnsetter(v){
@@ -47,24 +48,17 @@ userSchema.pre('save',async function (next){
     next();
 })
 
-// userSchema.statics.login = async function(email,password){
-//     const user = await this.findOne({ email });
-//     if (!user) {throw Error('User Does not exist');
-// console.log('user not exist');
 
-// }
-
-//     const isMatch = await bcrypt.compare(password, user.password);
-//     if (!isMatch){
-//         throw Error('Invalid credentials');
-//         console.log('password not match');
-//     } 
-//     else{
-//         return user
-//     }
-
-// }
-
+  userSchema.virtual('creatures' , {
+    ref : 'User',
+    localField : '_id',
+    foreignField : 'creator'
+  })
+  userSchema.virtual('gates' , {
+    ref : 'Gate',
+    localField : '_id',
+    foreignField : 'creator'
+  })
 
 
 

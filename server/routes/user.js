@@ -5,20 +5,13 @@ require('dotenv/config');
 const jwt=require('jsonwebtoken')
 const bcrypt=require("bcrypt");
 const mongoose =require('mongoose')
+const API =require('../middleware/adminauth')
 //--------------------------------------------------------------------
 const handleErrors=(err)=>{
-// console.log(err.message,err.code);
-//,lastName:"",firstName:"",lastName:"",phoneNumber:""
-let errors={email:"",password:"",lastName:"",firstName:"",lastName:"",phoneNumber:""}
- // incorrect email
-//  if (err.message === 'incorrect email') {
-//   errors.email = 'That email is not registered';
-// }
 
-// // incorrect password
-// if (err.message === 'incorrect password') {
-//   errors.password = 'That password is incorrect';
-// }
+
+let errors={email:"",password:"",lastName:"",firstName:"",lastName:"",phoneNumber:""}
+
 
 if(err.code===11000){
   
@@ -49,6 +42,15 @@ return errors;
 //-------------------------------------------------------------------------------------------
 
 //-------------------------------------------------------------------------------------------
+router.get('/currentuser',async(req,res)=>{
+  const user=await (await User.findOne({_id:req.user.id},'-password').populate('creatures gates','_id'))
+    if(user){
+      res.json({user})
+    }else{
+      res.json({errors:'errors!'})
+    }
+})
+  
 
 
 //-------------------------------------------------------------------------------------------
@@ -83,7 +85,7 @@ router.get("/",  (req,res) => {
       });
            
      
-    router.patch("/resetpassword",async(req,res)=>{
+    router.patch("/resetpassword",API.adminauth,async(req,res)=>{
       User.findOne({_id:req.body.id}, function(err, doc) {
         if (err) {
           const errors=handleErrors(err) 
@@ -129,10 +131,13 @@ router.get("/",  (req,res) => {
 
 
 
-    router.patch("/",async(req,res)=>{
+    router.patch("/",API.adminauth,async(req,res)=>{
       const cdata=[] 
       // const udata={}
       // const vdata=[]
+      console.log('---user---');
+      console.log(req.user);
+     
       const cid=req.body.id
       var query=null
      await User.find({_id:req.body.id},(err, users) => {
@@ -178,11 +183,6 @@ router.get("/",  (req,res) => {
         }
 
 
-
-
-
-
-
        })
       //  if ()
           console.log(mongoose.Types.ObjectId(req.body.id));
@@ -219,6 +219,7 @@ router.post("/",(req,res)=>{
         console.log(req.body.password)
        const user = new User({
           //  userName:req.body.userName,
+           creator:req.user.id,
            firstName:req.body.firstName,
            lastName:req.body.lastName,
            phoneNumber:req.body.phoneNumber,
@@ -245,7 +246,7 @@ router.post("/",(req,res)=>{
        })
   
     });
-router.delete("/",(req,res)=>{
+router.delete("/",API.adminauth,(req,res)=>{
   console.log(req.body.id);
   User.deleteOne({_id:req.body.id},(result)=>{
     console.log(result);

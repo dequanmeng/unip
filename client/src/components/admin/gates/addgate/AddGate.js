@@ -10,7 +10,7 @@ export const AddGate= ({edata,handleClose,editmode}) => {
    const [name, setname] = useState(edata.name)
    const [cname, setcname] = useState(edata.name)
    const [id, setid] = useState(edata._id)
-   const [errorMsg, seterrorMsg] = useState({name:"",apiKey:""})
+   const [errorMsg, seterrorMsg] = useState({name:"",apiKey:"",topic:""})
    const [response, setresponse] = useState('')
    
    const handleSubmit=async (e)=>{
@@ -102,7 +102,7 @@ export const AddGate= ({edata,handleClose,editmode}) => {
       
        
            { errorMsg.name &&<p className="adduser-error">{errorMsg.name}</p>}
-           
+           { errorMsg.topic &&<p className="adduser-error">{errorMsg.topic}</p>}
              {(response && !editmode) ? <p style={{color:'green'}}>successful!</p>:''}
     {response?.cdata?.length?(<><span style={{color:'orange'}}>{ response.cdata}</span><p style={{color:'green',marginTop:'.5rem'}}> successfully changed !</p></>):''}
             <div className="addgate-button-container">
