@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
-   
   },
   "repository": {
     "type": "git",
@@ -24,8 +23,10 @@
     "express-fileupload": "*",
     "jsonwebtoken": "*",
     "mkdirp": "*",
+    "moment": "^2.29.1",
     "mongoose": "*",
     "socket.io": "*",
+    "socket.io-client": "^3.0.4",
     "validator": "*"
   },
   "bugs": {

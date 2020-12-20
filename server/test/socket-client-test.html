@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="display: grid;place-items: center;">
+    <button id="inc" style='width: 500px;height: 100px;background-color: #24c48e;font-size: 50px;'>Stop</button>
+    <button id="inc1"  style='width: 500px;height: 100px;background-color: red;color:white;font-size: 50px;'>User 1</button>
+    <button id="inc2"  style='width: 500px;height: 100px;background-color: orange;color:white;font-size: 50px;'>User 2</button>
+    <pre id="log" style="font-size: 100px;"></pre>
+</body>
+<script src="./../node_modules/socket.io-client/dist/socket.io.js"></script>
+<script>
+    let i=0;
+    let ff=false;
+    const socket = io('ws://localhost:4000/tec1' ,{
+      header:{
+        'Access-Control-Allow-Origin': "*",
+        'Access-Control-Allow-Headers': "*",
+        'Content-Type': 'application/json',
+      },
+      query: {
+      
+        apiKey:"7b5p5ziczkerczuwrh7l2af9dc221h"
+       
+      }
+      });
+    const log=document.getElementById('log')
+    socket.on('connect', () => {
+       // true
+      //  socket.emit('msg',{topic:'tec1',data:{user:'5fd20e30bd872c1a46f42f71',time:new Date().getTime()}});
+         socket.on('msg',(msg)=>{
+           console.log(msg);
+          log.innerText=msg;
+         })  
+        // socket.emit('msg','hooo salam')
+        })
+    //  var  x=  setInterval(()=>{
+    //  //5fd20e8ebd872c1a46f42f73 new user 5fd20e30bd872c1a46f42f71
+    //   let y={topic:'tec1',data:{user:'5fd20e8ebd872c1a46f42f73',time:new Date()}}
+    //      socket.emit('msg',y);
+    //      log.innerHTML='kkkk'
+    //      },3000)
+    
+      document.getElementById('inc').addEventListener('click',()=>{
+         
+ 
+   
+       
+    
+ 
+    //  clearInterval(x)
+    //  console.log("clear");
+     
+ 
+   
+   
+
+      });
+      document.getElementById('inc1').addEventListener('click',()=>{
+        let y={topic:'tec1',data:{user:'5fd20e8ebd872c1a46f42f73',time:new Date()}}
+         socket.emit('msg',y);
+         log.innerHTML='user 1'
+
+          });
+          document.getElementById('inc2').addEventListener('click',()=>{
+            let y={topic:'tec1',data:{user:'5fd20e30bd872c1a46f42f71',time:new Date()}}
+         socket.emit('msg',y);
+         log.innerHTML='user 2'
+
+          });
+  /* const tss= io('http://localhost:3000/wss3', {
+    query: {
+      apiKey: "67900"
+    }
+    } )
+   tss.on('connect', () => {
+      console.log(tss.connected); // true
+      tss.on('hoo',(msg)=>{
+          log.innerText=msg;
+      })
+ 
+  
+    });
+ 
+    tss.on('time', (msg) => {
+        console.log(msg); // false
+        socket.emit('go',i++);
+      });
+
+
+
+
+
+    tss.on('disconnect', () => {
+        console.log(tss.connected); // false
+
+      });
+
+
+
+
+
+
+      const newio= io('http://localhost:3000/wss3')
+
+      newio.on('connect', () => {
+        console.log(newio.connected); // true
+    
+      })
+    newio.on('disconnect', () => {
+        console.log("[newio] : "+newio.connected); // false
+
+      });*/
+ 
+</script>
+
+</html>

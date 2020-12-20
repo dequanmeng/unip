@@ -30,7 +30,7 @@ export const useFetch = (url, options={}) => {
               console.log(data)
               console.log('----------------')
            
-              if (data.length){
+              if (data.length || data?.user){
                 setResponse(data);
                
                 setIsLoading(false)

@@ -9,7 +9,11 @@ const bodyParser=require("body-parser");
 const cors=require("cors");
 const {auth} =require('./middleware/auth.js') ;
 require('dotenv/config');
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, {
+  cors: {
+    origin: '*',
+  }
+});
 const mkdirp = require('mkdirp')
 const fs = require('fs');
 //----------------------------------------------------------------
@@ -24,7 +28,7 @@ const fs = require('fs');
 server.listen(port, () => {
   console.log('Server listening at port %d', port);
 });
-//broker
+// //broker
 // require('./broker')(io);
 // import route
 const usersRoute=require("./routes/user")
@@ -50,7 +54,7 @@ mongoose.connection.once('open',()=>{
 
 // Routing
 //app.use(express.static(path.join(__dirname, 'public')));
-const whitelist=['http://localhost:3000']
+const whitelist=['http://localhost:3000','http://127.0.0.1:5500/']
 var corsOptions = {
   origin: function (origin, callback) {
     if (whitelist.indexOf(origin) !== -1 || !origin) {
@@ -64,6 +68,8 @@ app.use(cors(corsOptions))
 //app.use(express.json())
 app.use(bodyParser.json());
 app.use(fileUpload());
+//broker
+require('./broker')(io);
 app.use("/login",loginRoute);
 app.post("/",(req,res)=>{
   res.send("welcome to smartcity")

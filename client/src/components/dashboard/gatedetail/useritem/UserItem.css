@@ -1,0 +1,36 @@
+.useritem{
+    background-color: var(--color-dark);
+    height: 12vh;
+    display: flex;
+    align-items: center;
+    border-top: .2px solid  rgba(82, 80, 80, 0.7);
+    border-left:3px solid var(--color-green);
+    justify-content: space-between;
+    padding-right: 1rem;
+    color: rgba(255, 255, 255, .7)!important;
+}
+.user_profile>img{
+ border-radius: 50%;
+ border:1px solid #666666;
+ width:14%;
+ padding: 4px;
+}
+.user_profile{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.status-inside{
+    color: green;
+}
+.status-outside{
+    color: red;
+}
+.status-yellow{
+    color: yellow;
+}
+.user_last_activity{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

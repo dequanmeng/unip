@@ -51,7 +51,22 @@ router.get('/currentuser',async(req,res)=>{
     }
 })
   
+//--------------------------------------------------------------------------------
+router.get('/:id',async(req,res)=>{
 
+ const user=await User.findOne({_id:req.params.id},'firstName lastName')
+  if(user){
+    res.json({user})
+   
+    
+  }else{
+    res.json({errors:err})
+  }
+  
+  
+
+
+})
 
 //-------------------------------------------------------------------------------------------
 router.get("/",  (req,res) => {

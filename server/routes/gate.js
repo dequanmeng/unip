@@ -3,6 +3,29 @@ const router=express.Router();
 const Gate =require("../models/gate")
 const GAPI = require('../middleware/gateauth');
 const API = require('../middleware/apikey');
+const moment = require('moment')
+
+
+//================
+function groupBy(list, keyGetter) {
+  const map = new Map();
+  list.forEach((item) => {
+       const key = keyGetter(item);
+       const collection = map.get(key);
+       if (!collection) {
+           map.set(key, [item]);
+       } else {
+           collection.push(item);
+       }
+  });
+  return map;
+}
+
+//===============
+
+
+
+//==================
 
 const handleErrors=(err)=>{
     // console.log(err.message,err.code);
@@ -121,22 +144,60 @@ gate.save()
 
 
 
+router.get("/data/today/:name/:status",(req,res)=>{
+  const today = moment().startOf('day')
 
-router.get("/:name",(req,res)=>{
-  Gate.find({name:req.params.name}, (err, gate) => {
+  // Gate.find({
+  //   createdAt: {
+  //     $gte: today.toDate(),
+  //     $lte: moment(today).endOf('day').toDate()
+  //   }
+  // })
+  Gate.findOne({name:String(req.params.name)},"data",(err, gate) => {
     if (err) {
       // handle error
       console.log("[Error]:route.gate.get(:name)");
       
       return;
     }
-    if (gate.length) {
+    var len=gate.data.length;
+    if (len) {
       // there are gate(s)
-      res.json(gate);
+      var todaydata= gate.data.filter(data=>moment(data.time).toDate()<moment(today).endOf('day').toDate()&&moment(data.time).toDate()>today.toDate())
+      
+      
+      if(req.params.status==1)
+      //outside
+      todaydata=todaydata.filter(data=>data.status==false)
+      else if(req.params.status==2)
+      //inside
+      todaydata=todaydata.filter(data=>data.status==true)
+      else if(req.params.status==3){
+      //between
+      var temp=[]
+      // todaydata.map(data=>{
+      //   temp[data.user]
+      //   temp[data.user].push({status:data.status,time:data.time})
+      //   return
+      // })
+      const grouped = groupBy(todaydata, data => data.user);
+      grouped.forEach(item=>{
+      
+        console.log(item.length);
+        if (item.length%2!=0){
+          temp.push(item[item.length-1])
+        }
+
+      })
+      console.log(temp);
+      todaydata=temp
+    }
+    console.log("td",todaydata);
+      res.json({data:todaydata,count:todaydata.length});
     } else {
       // there are no gates
       console.log("[Message]:route.gate.get(:name):No gate found by this name");
-      res.send("[Message]:route.gate.get(:name):No gate found by this name");
+      res.json({errors:'No data to display'});
     }
   });
       

@@ -42,7 +42,7 @@ export const Dashboard = () => {
              res?.isLoading ?'loading...':data?.map(gate => 
              { 
                
-              return <Gate key={gate._id} name={gate.name}/>
+              return <Gate key={gate._id} name={gate.name} topic={gate.topic} apiKey={gate.apiKey}/>
             
              }
               

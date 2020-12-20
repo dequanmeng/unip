@@ -126,6 +126,7 @@ export const UsersPanel = () => {
        
                 { title: 'Phone', field: 'phoneNumber' },
                 { title: 'isAdmin', field: 'isAdmin' ,lookup:{ true: <span style={{color:'green'}}>&#10003;</span>, false: "_" }},
+                { title: 'isInside', field: 'isInside' ,lookup:{ true: <span style={{color:'red'}}>&#10003;</span>, false: "_" }},
                 { title: 'creator', field: 'creator' ,cellStyle: {
                   
                   color: 'orange'

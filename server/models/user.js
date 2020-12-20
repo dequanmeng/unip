@@ -47,7 +47,21 @@ userSchema.pre('save',async function (next){
     console.log(this.password);
     next();
 })
+// userSchema.statics.toggleInside=async function(id){
+//   var data=await this.findOne({_id:id},'isInside ')
+//   // console.log(data.isInside);
+// await this.findOneAndUpdate({_id:id},{isInside:!data.isInside},(err,res)=>{
+// if(err){
+//   return false;
+// }
+// return res
+// })
+  
 
+ 
+
+
+// }
 
   userSchema.virtual('creatures' , {
     ref : 'User',

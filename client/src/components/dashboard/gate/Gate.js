@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import './Gate.css'
 import gateImg from './security-gate.svg'
-export const Gate = ({name}) => {
+export const Gate = ({name,topic,apiKey}) => {
     return (
         <div className="gate">
             <div className="gateImg-container">
@@ -11,7 +11,12 @@ export const Gate = ({name}) => {
              <p>
                  {name}
              </p>
-             <Link to="/admin">
+             <Link to={{
+                            pathname: '/dashboard/'+name,
+                            state: {
+                                topic: topic,
+                                apiKey: apiKey
+                            }}} >
              <button className="gate-btn">
                  visit
              </button>

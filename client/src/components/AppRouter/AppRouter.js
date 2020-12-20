@@ -4,6 +4,7 @@ import { AdminPanel } from '../admin/AdminPanel';
 import { GatesPanel } from '../admin/gates/GatesPanel';
 import { UsersPanel } from '../admin/users/UsersPanel';
 import { Dashboard } from '../dashboard/Dashboard';
+import {GateDetail} from '../dashboard/gatedetail/GateDetail'
 import Logout from '../logout/Logout';
 import { SideBar } from '../sidebar/SideBar';
 
@@ -23,9 +24,15 @@ export const  AppRouter=() =>{
     <Route exact path="/">
       <Redirect to="dashboard"/>
     </Route>
-    <Route path="/dashboard">
-     <Dashboard/>
+    <Route path="/dashboard" exact={true}>
+       <Dashboard/>
      </Route>
+     <Route path="/dashboard/:gate">
+     <GateDetail />
+     </Route>
+
+
+
     <Route path="/admin" exact={true}>
         <AdminPanel/>
 
