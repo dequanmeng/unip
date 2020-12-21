@@ -22,7 +22,23 @@ function groupBy(list, keyGetter) {
 }
 
 //===============
+getGreetingTime = (currentTime) => {
+  if (!currentTime || !currentTime.isValid()) { return ; }
 
+  const splitAfternoon = 12; // 24hr time to split the afternoon
+  const splitEvening = 17; // 24hr time to split the evening
+  const currentHour = parseFloat(currentTime.format('HH'));
+
+  if (currentHour >= splitAfternoon && currentHour <= splitEvening) {
+    // Between 12 PM and 5PM
+    return 'afternoon';
+  } else if (currentHour >= splitEvening) {
+    // Between 5PM and Midnight
+    return 'evening';
+  }
+  // Between dawn and noon
+  return 'morning';
+}
 
 
 //==================
@@ -139,7 +155,47 @@ gate.save()
     })
 
 
+router.get("/data/:id",(req,res)=>{
+  var ins=[]
+  var out=[]
+  var range=[]
+  var total=0
+  Gate.find({'data.user':req.params.id},"data",(err, gate) => {
+    if (err) {
+      // handle error
+      console.log("[Error]:route.gate.data(:id)");
+      
+      return;
+    }
+   
+    gate.map(item=>{
+     
+      // console.log('ins',item.data.filter(dt=>dt.user==req.params.id && dt.staus==true));
+       ins.push(...item.data.filter(dt=>dt.user==req.params.id&&dt.status==true))
+      //  console.log('out',item.data.filter(dt=>dt.user==req.params.id && dt.staus==true));
+       out.push(...item.data.filter(dt=>dt.user==req.params.id&&dt.status==false))
+       return
 
+    })
+    for( var i=0;i<out.length;i++){
+      
+      range.push([ins[i].time,out[i].time])
+      total+=moment(out[i].time).diff(ins[i].time)
+
+    }
+    var fdata= range.map(item=>{
+      var t=getGreetingTime(moment(item[0]))
+      return {
+         x:t,
+         y:[new Date(item[0]).getTime(),new Date(item[1]).getTime()]
+         ,fillColor:t=='morning' ?'#94e3cd':t=='afternoon'?'#77a7ab':'var(--color-green)'
+      }
+  })
+    // res.json({ins,out,inslen:ins.length,outlen:out.length});
+    res.json({fdata,total})
+  })
+
+})
 
 
 

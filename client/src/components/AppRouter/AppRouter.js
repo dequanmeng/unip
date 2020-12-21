@@ -5,6 +5,7 @@ import { GatesPanel } from '../admin/gates/GatesPanel';
 import { UsersPanel } from '../admin/users/UsersPanel';
 import { Dashboard } from '../dashboard/Dashboard';
 import {GateDetail} from '../dashboard/gatedetail/GateDetail'
+import { Insight } from '../insight/Insight';
 import Logout from '../logout/Logout';
 import { SideBar } from '../sidebar/SideBar';
 
@@ -46,8 +47,8 @@ export const  AppRouter=() =>{
     <Route path="/admin/gates">
            <GatesPanel/>
     </Route>
-    <Route path="/profile">
-     
+    <Route path="/insights">
+         <Insight/>
     </Route>
 
  

@@ -16,7 +16,9 @@ const gateSchema =  new mongoose.Schema({
        name:{type : String ,  trim: true,unique : true  ,required : [ true , "please enter an Name"]},
        lable: [String],
        apiKey:{type : String , unique : true  ,required : true,default:function() { return genKey()} },
-       data:[{ }],
+       data:[{
+  
+        }],
        active: { type: Boolean,  default: true },
        topic:{type : String , unique : true ,default:function() { return this.name} },
        properties: {

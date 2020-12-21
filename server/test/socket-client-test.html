@@ -15,15 +15,16 @@
 <script>
     let i=0;
     let ff=false;
-    const socket = io('ws://localhost:4000/tec1' ,{
+    const socket = io('ws://localhost:4000/tec2' ,{
       header:{
         'Access-Control-Allow-Origin': "*",
         'Access-Control-Allow-Headers': "*",
         'Content-Type': 'application/json',
       },
       query: {
-      
-        apiKey:"7b5p5ziczkerczuwrh7l2af9dc221h"
+      //{"apiKey":"r8f4gpovsmvvuk9foqax8tguvm72gh","topic":"tec2"}
+      //  apiKey:"7b5p5ziczkerczuwrh7l2af9dc221h"
+      apiKey:"r8f4gpovsmvvuk9foqax8tguvm72gh"
        
       }
       });
@@ -60,13 +61,13 @@
 
       });
       document.getElementById('inc1').addEventListener('click',()=>{
-        let y={topic:'tec1',data:{user:'5fd20e8ebd872c1a46f42f73',time:new Date()}}
+        let y={topic:'tec2',data:{user:'5fd20e8ebd872c1a46f42f73',time:new Date()}}
          socket.emit('msg',y);
          log.innerHTML='user 1'
 
           });
           document.getElementById('inc2').addEventListener('click',()=>{
-            let y={topic:'tec1',data:{user:'5fd20e30bd872c1a46f42f71',time:new Date()}}
+            let y={topic:'tec2',data:{user:'5fd20e30bd872c1a46f42f71',time:new Date()}}
          socket.emit('msg',y);
          log.innerHTML='user 2'
 

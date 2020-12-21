@@ -1,0 +1,52 @@
+.insight{
+    width: calc(100% - 60px);
+    height: 100vh;
+    background-color: var(--color-gray);
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+   
+}
+.chart-container{
+   width:85%;
+   height: 60vh;
+   margin-top: 2rem;
+}
+.apexcharts-canvas{
+    background-color: var(--color-gray-dark)!important;
+}
+.user-selection-bar{
+
+    height: 12vh;
+    background-color: var(--color-gray-dark);
+    padding: 25px;
+    color:rgba(255,255,255,.7);
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.user-selection-bar>p{
+    font-size: large;
+}
+.grouped-demo{
+    width: 300px!important;
+    border:var(--color-green)!important ;
+   
+}
+.MuiInputBase-root{
+    color:rgba(255,255,255,.7)!important;
+}
+.MuiFormLabel-root {
+    color:rgba(255,255,255,.7)!important;
+}
+.Mui-focused{
+    border:green!important;
+}
+.MuiTouchRipple-root{
+    color:rgba(255,255,255,.7)!important;
+}
+.MuiAutocomplete-clearIndicator,.MuiAutocomplete-popupIndicator,
+.MuiAutocomplete-popupIndicatorOpen
+{
+    color:rgba(255,255,255,.7)!important;
+}
