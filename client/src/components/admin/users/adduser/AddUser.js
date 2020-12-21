@@ -102,7 +102,7 @@ export const AddUser = ({edata,handleClose,editmode}) => {
                                     onChange={(e)=>{setfirstName(e.target.value)}}
                                 />
                             
-                    </div>
+                  </div>
                     <div className="input-container ml">
                                 <div className="icon">
                                 <img src={lnIcon} />
