@@ -6,8 +6,8 @@
 `cd ./server`\
  set DB conection in  sever/server.js\
 `npm install`\
-`npm start`\
+`npm start`
 ## frontend
 `cd ../client`\
 `npm install`\
-`npm start`\
+`npm start`
